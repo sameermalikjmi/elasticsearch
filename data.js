@@ -17,15 +17,15 @@ client.ping({
 
 
  // create a new index called scotch.io-tutorial. If the index has already been created, this function fails safely
-// client.indices.create({
-//     index: 'rome'
-// }, function(error, response, status) {
-//     if (error) {
-//         console.log(error);
-//     } else {
-//         console.log("created a new index", response);
-//     }
-// });
+client.indices.create({
+    index: 'rome'
+}, function(error, response, status) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("created a new index", response);
+    }
+});
 
 client.index({
     index: 'rome',
