@@ -7,7 +7,7 @@
 <div class="container" id="app">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h1>Search Cities around the world</h1>
+            <h1>Search favourite movies</h1>
         </div>
     </div>
     <div class="row">
@@ -26,11 +26,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                 <!-- display the city name and country  -->
-                    {{ result._source.name }}, {{ result._source.country }} 
+                    {{ result._source.title }}, {{ result._source.year }} 
                 </div>
                 <div class="panel-body">
                 <!-- display the latitude and longitude of the city  -->
-                    <p>lat:{{ result._source.lat }}, long: {{ result._source.lng }}.</p>
+                    <p>Genre:{{ result._source.genre[0] }}</p>
                 </div>
             </div>
         </div>
@@ -60,12 +60,12 @@ var app = new Vue({
                     from: 0,
                     query: {
                         match: {
-                            name: this.query
+                            title: this.query
                         }
                     }
                 }
                 // search the Elasticsearch passing in the index, query object and type
-            client.search({ index: 'rome', body: body, type: 'cities_list' })
+            client.search({ index: 'movies', body: body, type: 'movies_list' })
                 .then(results => {
                   //  console.log(`found ${results.hits.total} items in ${results.took}ms`);
                     // set the results to the result array we have 
@@ -80,7 +80,7 @@ var app = new Vue({
               for (let i in resultsInitial) { 
         
                   // Extract the title 
-                  objTitle = resultsInitial[i]['_source']['name']
+                  objTitle = resultsInitial[i]['_source']['title']
                   _
         
                   // Use the title as the index 
